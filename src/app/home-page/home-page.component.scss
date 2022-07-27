@@ -1,0 +1,31 @@
+.home {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: clamp(5%, 25%, 40%);
+  right: clamp(5%, 25%, 40%);
+
+  border-inline: 1px solid #ccc;
+
+  padding: 2rem;
+
+  &__title {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+
+  &__toggle-feed {
+    mat-slide-toggle {
+      margin: 0 0.5rem;
+    }
+  }
+
+  .topbar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}

@@ -1,0 +1,32 @@
+.new-post {
+  display: flex;
+  flex-direction: row;
+  padding: 2rem 0 0 0;
+
+  .portrait {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    background-color: red;
+  }
+
+  &__textarea {
+    flex: 1;
+    margin-left: 1.5rem;
+    width: 100%;
+  }
+}
+
+.post-submit {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+::ng-deep .mat-form-field-underline {
+    display: none;
+}
+
+::ng-deep .mat-form-field-wrapper {
+  padding: 0;
+}

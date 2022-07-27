@@ -1,0 +1,20 @@
+<div class="new-post">
+  <div class="portrait"></div>
+  <mat-form-field appearance="standard" class="new-post__textarea">
+    <textarea
+      matInput
+      placeholder="What's on your mind?"
+      cdkTextareaAutosize
+      #autosize="cdkTextareaAutosize"
+      cdkAutosizeMinRows="2"
+      cdkAutosizeMaxRows="15"
+    ></textarea>
+    <hr />
+  </mat-form-field>
+</div>
+<div class="row">
+  <div class="col post-submit">
+    <button mat-raised-button color="primary">Post</button>
+  </div>
+</div>
+<hr>
