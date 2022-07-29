@@ -1,17 +1,16 @@
 <div class="new-post">
   <div class="portrait">
-    <img [src]="assetsPath + 'Lewis-Hamilton' + '.jpg'" alt="" srcset="" />
+    <img
+      [src]="assetsPath + 'Lewis-Hamilton' + '.jpg'"
+      alt="User profile picture"
+    />
   </div>
-  <mat-form-field
-    appearance="standard"
-    class="new-post__textarea"
-    
-  >
+  <mat-form-field appearance="standard" class="new-post__textarea">
     <textarea
       #postInput
       matInput
       placeholder="What's on your mind?"
-      cdkTextareaAutosize
+      cdkTextareaAutosize 
       #autosize="cdkTextareaAutosize"
       cdkAutosizeMinRows="2"
       cdkAutosizeMaxRows="15"

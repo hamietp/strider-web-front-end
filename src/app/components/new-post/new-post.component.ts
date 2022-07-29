@@ -1,5 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { UserProfileComponent } from 'src/app/user-profile/user-profile.component';
 
 @Component({
   selector: 'app-new-post',
@@ -7,11 +15,12 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./new-post.component.scss'],
 })
 export class NewPostComponent implements OnInit {
-  public formTextarea = new FormControl([], Validators.maxLength(777));
   public postFeed: any[] = [];
   public assetsPath = '../../../assets/portraits/';
 
-  constructor() {}
+  public formTextarea = new FormControl([], Validators.maxLength(777));
+
+  constructor(public dialog: MatDialog) {}
 
   ngOnInit(): void {}
 
@@ -33,7 +42,30 @@ export class NewPostComponent implements OnInit {
 
     newPost = [...userPosts, newPostObject] as string[];
 
-    localStorage.setItem('payload',
-          JSON.stringify(newPost) || 'Post something to your feed!')!;
+    localStorage.setItem(
+      'payload',
+      JSON.stringify(newPost) || 'Post something to your feed!'
+    )!;
+  }
+
+  // get number os posts that the user has made in the last 24 hours
+  // TODO: validate this function
+  getPosts(): number {
+    let userPosts: any[] = [];
+
+    if (localStorage.getItem('payload') !== null) {
+      userPosts = JSON.parse(localStorage.getItem('payload') || '');
+
+      // filter by user 'Hamilton'
+      userPosts = userPosts.filter((post: any) => post.username === 'Hamilton');
+    }
+
+    const today = new Date();
+    const yesterday = new Date(today.getTime() - 24 * 60 * 60 * 1000);
+    const posts = userPosts.filter(
+      (post) => new Date(post.timestamp) > yesterday
+    );
+
+    return posts.length;
   }
 }

@@ -1,1 +1,29 @@
-<p>user-profile works!</p>
+<div class="profile">
+  <div class="profile__header">
+    <div class="profile__data">
+      <div class="profile__data--username">Lewis Hamilton</div>
+      <div class="profile__data--nickname">@lewishamilton</div>
+      <div class="profile__data--join-date"><mat-icon>calendar_month</mat-icon> Joined November 10, 2020</div>
+    </div>
+    <div class="profile__numbers">
+      <div class="profile__numbers--posts">
+        <span class="profile__numbers--number">{{ userPosts.length }}</span>
+        <span class="profile__numbers--text">Posts</span>
+      </div>
+      <div class="profile__numbers--followers">
+        <span class="profile__numbers--number">999</span>
+        <span class="profile__numbers--text">Followers</span>
+      </div>
+      <div class="profile__numbers--following">
+        <span class="profile__numbers--number">124</span>
+        <span class="profile__numbers--text">Following</span>
+      </div>
+    </div>
+  </div>
+  <div class="profile__new-post">
+    <app-new-post></app-new-post>
+  </div>
+  <div class="profile__user-posts">
+    <app-user-posts></app-user-posts>
+  </div>
+</div>

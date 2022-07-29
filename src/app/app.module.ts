@@ -9,10 +9,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { NewPostComponent } from './components/new-post/new-post.component';
 import { UserCardComponent } from './components/user-card/user-card.component';
@@ -23,9 +25,11 @@ const MATERIAL_MODULES = [
   MatButtonModule,
   MatDialogModule,
   MatFormFieldModule,
+  MatIconModule,
   MatInputModule,
   MatSidenavModule,
   MatSlideToggleModule,
+  MatTooltipModule
 ];
 
 @NgModule({
