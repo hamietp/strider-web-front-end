@@ -8,6 +8,7 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -16,11 +17,13 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { NewPostComponent } from './components/new-post/new-post.component';
 import { UserCardComponent } from './components/user-card/user-card.component';
 import { UserPostsComponent } from './components/user-posts/user-posts.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 const MATERIAL_MODULES = [
   MatButtonModule,
-  MatInputModule,
+  MatDialogModule,
   MatFormFieldModule,
+  MatInputModule,
   MatSidenavModule,
   MatSlideToggleModule,
 ];
@@ -28,17 +31,18 @@ const MATERIAL_MODULES = [
 @NgModule({
   declarations: [
     AppComponent,
-    UserProfileComponent,
     HomePageComponent,
     NewPostComponent,
     UserCardComponent,
     UserPostsComponent,
+    UserProfileComponent,
   ],
   imports: [
     ...MATERIAL_MODULES,
-    BrowserModule,
     AppRoutingModule,
+    BrowserModule,
     BrowserAnimationsModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

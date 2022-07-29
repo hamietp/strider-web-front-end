@@ -1,1 +1,19 @@
-<p>user-posts works!</p>
+<div class="row" *ngFor="let item of userPosts">
+  <div class="col message-card">
+    <div class="user__header">
+      <div class="user__portrait">
+        <img [src]="assetsPath + item.portrait + '.jpg'" alt="" srcset="" />
+      </div>
+      <div class="user__post">
+        <div class="user__data">
+          <div class="user__data--name">{{ item.username }}</div>
+          <div class="user__data--nickname">{{ item.nickname }}</div>
+          <div class="user__data--post-date">
+            · {{ item.timestamp | date: "MMMM, dd, h:mm a" }}
+          </div>
+        </div>
+        <div class="user__message">{{ item.message }}</div>
+      </div>
+    </div>
+  </div>
+</div>

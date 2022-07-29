@@ -1,20 +1,40 @@
 <div class="new-post">
-  <div class="portrait"></div>
-  <mat-form-field appearance="standard" class="new-post__textarea">
+  <div class="portrait">
+    <img [src]="assetsPath + 'Lewis-Hamilton' + '.jpg'" alt="" srcset="" />
+  </div>
+  <mat-form-field
+    appearance="standard"
+    class="new-post__textarea"
+    
+  >
     <textarea
+      #postInput
       matInput
       placeholder="What's on your mind?"
       cdkTextareaAutosize
       #autosize="cdkTextareaAutosize"
       cdkAutosizeMinRows="2"
       cdkAutosizeMaxRows="15"
+      [formControl]="formTextarea"
     ></textarea>
     <hr />
   </mat-form-field>
 </div>
-<div class="row">
-  <div class="col post-submit">
-    <button mat-raised-button color="primary">Post</button>
-  </div>
+<div class="col post-submit">
+  <span class="post-submit__toggle-feed"
+    >All<mat-slide-toggle color="primary"></mat-slide-toggle>Following</span
+  >
+  <span>
+    {{ postInput.value.length || 0 }}/777
+    <button
+      class="post-submit__btn"
+      mat-flat-button
+      color="primary"
+      (click)="onSubmit(postInput.value)"
+      [disabled]="postInput.value.length < 1"
+    >
+      Publish
+    </button>
+  </span>
 </div>
-<hr>
+<hr />
