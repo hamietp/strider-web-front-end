@@ -1,20 +1,23 @@
 import {
-  AfterViewInit,
   ChangeDetectorRef,
   Component,
-  OnInit,
+  OnInit
 } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
   styleUrls: ['./user-profile.component.scss'],
 })
-export class UserProfileComponent implements OnInit, AfterViewInit {
+export class UserProfileComponent implements OnInit {
   public userPosts: UserPosts[] = [];
   public assetsPath = '../../../assets/portraits/';
-  constructor(private cd: ChangeDetectorRef, public dialog: MatDialog) {}
+
+
+
+  constructor(
+    private cd: ChangeDetectorRef,
+  ) {}
 
   ngAfterViewInit(): void {}
 

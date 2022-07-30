@@ -3,6 +3,7 @@
     <img
       [src]="assetsPath + 'Lewis-Hamilton' + '.jpg'"
       alt="User profile picture"
+      routerLink="/lewishamilton"
     />
   </div>
   <mat-form-field appearance="standard" class="new-post__textarea">
@@ -10,11 +11,17 @@
       #postInput
       matInput
       placeholder="What's on your mind?"
-      cdkTextareaAutosize 
+      cdkTextareaAutosize
       #autosize="cdkTextareaAutosize"
       cdkAutosizeMinRows="2"
       cdkAutosizeMaxRows="15"
+      maxlength="777"
       [formControl]="formTextarea"
+      [matTooltip]="
+        postInput.value.length === 777
+          ? 'You have reached the maximum post length'
+          : ''
+      "
     ></textarea>
     <hr />
   </mat-form-field>
@@ -23,14 +30,24 @@
   <span class="post-submit__toggle-feed"
     >All<mat-slide-toggle color="primary"></mat-slide-toggle>Following</span
   >
+  <span class="post-submit__max-posts" *ngIf="userDailyPosts < 5">
+    You've posted {{ userDailyPosts }} times today (max: 5).</span
+  >
+  <span class="post-submit__max-posts" *ngIf="userDailyPosts === 5">
+    You've reached your daily post limit.</span
+  >
   <span>
     {{ postInput.value.length || 0 }}/777
     <button
       class="post-submit__btn"
+      s
       mat-flat-button
       color="primary"
       (click)="onSubmit(postInput.value)"
-      [disabled]="postInput.value.length < 1"
+      [disabled]="postInput.value.length < 1 || userDailyPosts >= 5"
+      [matTooltip]="
+        userDailyPosts > 5 ? 'You have reached your daily post limit' : ''
+      "
     >
       Publish
     </button>

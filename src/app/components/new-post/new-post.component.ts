@@ -17,12 +17,15 @@ import { UserProfileComponent } from 'src/app/user-profile/user-profile.componen
 export class NewPostComponent implements OnInit {
   public postFeed: any[] = [];
   public assetsPath = '../../../assets/portraits/';
+  public userDailyPosts = 0;
 
   public formTextarea = new FormControl([], Validators.maxLength(777));
 
   constructor(public dialog: MatDialog) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.userDailyPosts = this.getPosts();
+  }
 
   onSubmit(message: string): void {
     let userPosts: string[] = [];
