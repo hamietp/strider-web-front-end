@@ -20,6 +20,7 @@ import { NewPostComponent } from './components/new-post/new-post.component';
 import { UserCardComponent } from './components/user-card/user-card.component';
 import { UserPostsComponent } from './components/user-posts/user-posts.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HostComponent } from './components/host/host.component';
 
 const MATERIAL_MODULES = [
   MatButtonModule,
@@ -40,6 +41,7 @@ const MATERIAL_MODULES = [
     UserCardComponent,
     UserPostsComponent,
     UserProfileComponent,
+    HostComponent,
   ],
   imports: [
     ...MATERIAL_MODULES,
