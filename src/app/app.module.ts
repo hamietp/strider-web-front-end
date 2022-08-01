@@ -41,7 +41,6 @@ const MATERIAL_MODULES = [
     UserCardComponent,
     UserPostsComponent,
     UserProfileComponent,
-    HostComponent,
   ],
   imports: [
     ...MATERIAL_MODULES,
@@ -50,6 +49,7 @@ const MATERIAL_MODULES = [
     BrowserAnimationsModule,
     ReactiveFormsModule,
   ],
+  entryComponents: [UserProfileComponent],
   providers: [],
   bootstrap: [AppComponent],
 })

@@ -9,7 +9,7 @@ import { UserProfileComponent } from 'src/app/user-profile/user-profile.componen
   styleUrls: ['./host.component.scss'],
 })
 export class HostComponent {
-  public currentDialog: MatDialogRef<any> = null!;
+  public currentDialog: MatDialogRef<any> = undefined!;
   private destroy = new Subject<any>();
 
   constructor(
@@ -30,6 +30,6 @@ export class HostComponent {
   }
 
   ngOnDestroy(): void {
-    this.destroy.next(void 0);
+    this.destroy.next(true);
   }
 }

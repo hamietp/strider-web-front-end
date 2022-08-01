@@ -1,8 +1,4 @@
-import {
-  ChangeDetectorRef,
-  Component,
-  OnInit
-} from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-user-profile',
@@ -13,13 +9,7 @@ export class UserProfileComponent implements OnInit {
   public userPosts: UserPosts[] = [];
   public assetsPath = '../../../assets/portraits/';
 
-
-
-  constructor(
-    private cd: ChangeDetectorRef,
-  ) {}
-
-  ngAfterViewInit(): void {}
+  constructor() {}
 
   ngOnInit(): void {
     this.userPosts = JSON.parse(localStorage.getItem('payload')!).sort(
@@ -38,4 +28,6 @@ export interface UserPosts {
   message: string;
   timestamp: Date;
   portrait: string;
+  followers?: number;
+  following?: number;
 }
