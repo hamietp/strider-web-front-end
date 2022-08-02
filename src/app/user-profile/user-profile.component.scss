@@ -33,6 +33,27 @@
       color: #8c8c8c;
     }
 
+    &--portrait {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-start;
+      
+      margin-bottom: 1rem;
+      
+      img {
+        width: 6rem;
+        height: 6rem;
+
+        border: #23c8ffbb solid 3px;
+        border-radius: 50%;
+
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+      }
+    }
+
     &--follow {
       mat-icon.follow {
         position: relative;

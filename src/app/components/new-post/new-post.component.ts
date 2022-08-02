@@ -3,12 +3,12 @@ import {
   ChangeDetectorRef,
   Component,
   OnInit,
-  ViewChild,
+  ViewChild
 } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -23,6 +23,7 @@ export class NewPostComponent implements OnInit, AfterContentChecked {
   public userDailyPosts = 0;
   public userDailyPosts$!: Observable<number>;
   isSlideChecked: boolean = false;
+  currentRoute: string = this.router.url.split('/')[1];
 
   @ViewChild('postInput') userInput: any;
 
@@ -31,10 +32,10 @@ export class NewPostComponent implements OnInit, AfterContentChecked {
   constructor(
     public dialog: MatDialog,
     private cdRef: ChangeDetectorRef,
-    private route: ActivatedRoute,
     private router: Router
   ) {
     this.userDailyPosts$ = new Observable<number>();
+    
   }
 
   ngAfterContentChecked(): void {
@@ -99,7 +100,7 @@ export class NewPostComponent implements OnInit, AfterContentChecked {
       this.router.navigate(['/following']);
       this.isSlideChecked = true;
       $event.source.checked = true;
-    } else {
+    } else{
       this.router.navigate(['/all']);
       this.isSlideChecked = false;
       $event.source.checked = false;
@@ -109,8 +110,8 @@ export class NewPostComponent implements OnInit, AfterContentChecked {
   slideUrlCheck(): boolean {
     if (this.router.url.split('/')[1] === 'all') {
       return false;
-    } else {
+    } else if (this.router.url.split('/')[1] === 'following') {
       return true;
-    }
+    } else { return false; }
   }
 }

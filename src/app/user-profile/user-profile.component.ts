@@ -51,8 +51,6 @@ export class UserProfileComponent implements OnInit {
         this.followable = true;
       }
     });
-
-    console.log(this.followable);
   }
 
   followUser(): void {

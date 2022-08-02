@@ -27,7 +27,7 @@
   </mat-form-field>
 </div>
 <div class="col post-submit">
-  <span class="post-submit__toggle-feed"
+  <span *ngIf="currentRoute === 'all' || currentRoute === 'following'" class="post-submit__toggle-feed"
     >All<mat-slide-toggle color="warn" [checked]="isSlideChecked" (change)="onTogglePosts($event)"></mat-slide-toggle>Following</span
   >
   <span class="post-submit__max-posts" *ngIf="userDailyPosts < 5">
