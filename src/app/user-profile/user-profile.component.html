@@ -1,21 +1,45 @@
 <div class="profile">
   <div class="profile__header">
     <div class="profile__data">
-      <div class="profile__data--username">Hamilton</div>
-      <div class="profile__data--nickname">@lewishamilton</div>
-      <div class="profile__data--join-date"><mat-icon>calendar_month</mat-icon> Joined November 10, 2020</div>
+      <div class="profile__data--username">
+        {{ fetchedData[0].username }}
+        <div class="profile__data--follow">
+          <button *ngIf="followable && fetchedData[0].nickname !== 'lewishamilton'" mat-stroked-button color="link" (click)="followUser()" 
+          [disabled]="fetchedData[0].nickname === 'lewishamilton' ?
+            true : false">
+            <mat-icon class="follow">person_add</mat-icon> Follow
+          </button>
+          <button *ngIf="!followable && fetchedData[0].nickname !== 'lewishamilton'" mat-stroked-button color="link" (click)="unfollowUser()" 
+          [disabled]="fetchedData[0].nickname === 'lewishamilton' ?
+            true : false">
+            <mat-icon class="follow">person_remove</mat-icon> Unfollow
+          </button>
+        </div>
+      </div>
+      <div class="profile__data--nickname">@{{ fetchedData[0].nickname }}</div>
+      <div class="profile__data--join-date">
+        <mat-icon>calendar_month</mat-icon> Joined November 10, 2020
+      </div>
     </div>
     <div class="profile__numbers">
       <div class="profile__numbers--posts">
-        <span class="profile__numbers--number">{{ userPosts.length }}</span>
+        <span class="profile__numbers--number">{{ fetchedData.length }}</span>
         <span class="profile__numbers--text">Posts</span>
       </div>
       <div class="profile__numbers--followers">
-        <span class="profile__numbers--number">999</span>
+        <span class="profile__numbers--number">{{
+          fetchedData[0].followers!.length === undefined
+            ? "0"
+            : fetchedData[0].followers!.length
+        }}</span>
         <span class="profile__numbers--text">Followers</span>
       </div>
       <div class="profile__numbers--following">
-        <span class="profile__numbers--number">124</span>
+        <span class="profile__numbers--number">{{
+          fetchedData[0].following!.length === undefined
+            ? "0"
+            : fetchedData[0].following!.length
+        }}</span>
         <span class="profile__numbers--text">Following</span>
       </div>
     </div>
