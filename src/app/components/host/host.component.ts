@@ -22,8 +22,12 @@ export class HostComponent {
         this.currentDialog.close();
       }
 
-      this.currentDialog = dialog.open(UserProfileComponent);
-      this.currentDialog.afterClosed().subscribe((res) => {
+      this.currentDialog = dialog.open(UserProfileComponent, {
+        data: {
+          id: params['id'],
+        },
+      });
+      this.currentDialog.afterClosed().subscribe((_) => {
         router.navigateByUrl('/');
       });
     });

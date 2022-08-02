@@ -1,11 +1,12 @@
 import {
   AfterContentChecked,
-  AfterViewInit,
   ChangeDetectorRef,
   Component,
   OnInit,
 } from '@angular/core';
-import { Observable, Subject, takeUntil } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
+import { Observable, Subject } from 'rxjs';
+import { UserPostsInterface } from 'src/app/interfaces/user-posts.interface';
 
 @Component({
   selector: 'app-user-posts',
@@ -16,13 +17,13 @@ export class UserPostsComponent implements OnInit, AfterContentChecked {
   public assetsPath = '../../../assets/portraits/';
 
   public postFeed: string[] = [];
-  public userPosts: UserPosts[] = [];
-  public userPosts$!: Observable<UserPosts[]>;
+  public userPosts: UserPostsInterface[] = [];
+  public userPosts$!: Observable<UserPostsInterface[]>;
 
   private destroy = new Subject<any>();
 
-  constructor(private cdRef: ChangeDetectorRef) {
-    this.userPosts$ = new Observable<UserPosts[]>();
+  constructor(private cdRef: ChangeDetectorRef, private route: ActivatedRoute) {
+    this.userPosts$ = new Observable<UserPostsInterface[]>();
   }
 
   ngAfterContentChecked(): void {
@@ -48,14 +49,4 @@ export class UserPostsComponent implements OnInit, AfterContentChecked {
     this.destroy.next(void 0);
     this.destroy.complete();
   }
-}
-
-export interface UserPosts {
-  username: string;
-  nickname: string;
-  message: string;
-  timestamp: Date;
-  portrait: string;
-  followers?: number;
-  following?: number;
 }
