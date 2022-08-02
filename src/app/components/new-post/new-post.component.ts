@@ -7,6 +7,8 @@ import {
 } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSlideToggleChange } from '@angular/material/slide-toggle';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -20,12 +22,18 @@ export class NewPostComponent implements OnInit, AfterContentChecked {
   public postFeed: any[] = [];
   public userDailyPosts = 0;
   public userDailyPosts$!: Observable<number>;
+  isSlideChecked: boolean = false;
 
   @ViewChild('postInput') userInput: any;
 
   public formTextarea = new FormControl([], Validators.maxLength(777));
 
-  constructor(public dialog: MatDialog, private cdRef: ChangeDetectorRef) {
+  constructor(
+    public dialog: MatDialog,
+    private cdRef: ChangeDetectorRef,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {
     this.userDailyPosts$ = new Observable<number>();
   }
 
@@ -36,6 +44,7 @@ export class NewPostComponent implements OnInit, AfterContentChecked {
 
   ngOnInit(): void {
     this.userDailyPosts = this.getPosts();
+    this.isSlideChecked = this.slideUrlCheck();
   }
 
   onSubmit(message: string): void {
@@ -48,7 +57,7 @@ export class NewPostComponent implements OnInit, AfterContentChecked {
 
     const newPostObject = {
       username: 'Hamilton',
-      nickname: '@lewishamilton',
+      nickname: 'lewishamilton',
       message: message,
       timestamp: new Date().toISOString(),
       portrait: 'Lewis-Hamilton',
@@ -81,5 +90,27 @@ export class NewPostComponent implements OnInit, AfterContentChecked {
     );
 
     return posts.length;
+  }
+
+  onTogglePosts($event: MatSlideToggleChange): void {
+    const url = this.router.url.split('/')[1];
+
+    if (url === 'all') {
+      this.router.navigate(['/following']);
+      this.isSlideChecked = true;
+      $event.source.checked = true;
+    } else {
+      this.router.navigate(['/all']);
+      this.isSlideChecked = false;
+      $event.source.checked = false;
+    }
+  }
+
+  slideUrlCheck(): boolean {
+    if (this.router.url.split('/')[1] === 'all') {
+      return false;
+    } else {
+      return true;
+    }
   }
 }

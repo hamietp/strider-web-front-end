@@ -30,15 +30,23 @@
       margin: 0 0.5rem;
     }
   }
-
+  
   &__max-posts {
     font-size: 0.8rem;
     color: #8c8c8c;
   }
-
+  
   &__btn {
     margin-left: 1rem;
   }
+}
+
+::ng-deep mat-slide-toggle.mat-warn:not(.mat-checked):not(.mat-disabled) .mat-slide-toggle-bar {
+  background-color: #23c8ffbb; 
+}
+
+::ng-deep mat-slide-toggle.mat-warn:not(.mat-checked):not(.mat-disabled) .mat-slide-toggle-thumb {
+  background-color: #007aa3
 }
 
 ::ng-deep .mat-form-field-underline {

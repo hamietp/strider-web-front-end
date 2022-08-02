@@ -5,9 +5,10 @@ import { NewPostComponent } from './components/new-post/new-post.component';
 import { HomePageComponent } from './home-page/home-page.component';
 
 const routes: Routes = [
-  { path: '', component: HomePageComponent },
+  { path: 'all', component: HomePageComponent },
+  { path: 'following', component: HomePageComponent },
   { path: ':id', component: HostComponent },
-  { path: '**', redirectTo: '' },
+  { path: '**', redirectTo: 'all' },
 ];
 
 @NgModule({

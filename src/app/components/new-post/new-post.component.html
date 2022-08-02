@@ -3,7 +3,7 @@
     <img
       [src]="assetsPath + 'Lewis-Hamilton' + '.jpg'"
       alt="User profile picture"
-      [routerLink]="['/lewishamilton']"
+      routerLink="/lewishamilton"
     />
   </div>
   <mat-form-field appearance="standard" class="new-post__textarea">
@@ -28,7 +28,7 @@
 </div>
 <div class="col post-submit">
   <span class="post-submit__toggle-feed"
-    >All<mat-slide-toggle color="primary"></mat-slide-toggle>Following</span
+    >All<mat-slide-toggle color="warn" [checked]="isSlideChecked" (change)="onTogglePosts($event)"></mat-slide-toggle>Following</span
   >
   <span class="post-submit__max-posts" *ngIf="userDailyPosts < 5">
     You've posted {{ userDailyPosts }} times today (max: 5).</span
