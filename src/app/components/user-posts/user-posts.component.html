@@ -1,8 +1,12 @@
-<div class="row" *ngFor="let item of userPosts">
+<div class="row" *ngFor="let item of filteredPosts">
   <div class="col message-card">
     <div class="user__header">
       <div class="user__portrait">
-        <img [src]="assetsPath + item.portrait + '.jpg'" alt="User profile picture" routerLink="/{{item.nickname}}" />
+        <img
+          [src]="assetsPath + item.portrait + '.jpg'"
+          alt="User profile picture"
+          routerLink="/{{ item.nickname }}"
+        />
       </div>
       <div class="user__post">
         <div class="user__data">

@@ -4,7 +4,7 @@ import {
   Component,
   OnInit,
 } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
 import { UserPostsInterface } from 'src/app/interfaces/user-posts.interface';
 
@@ -16,14 +16,14 @@ import { UserPostsInterface } from 'src/app/interfaces/user-posts.interface';
 export class UserPostsComponent implements OnInit, AfterContentChecked {
   public assetsPath = '../../../assets/portraits/';
 
-  public postFeed: string[] = [];
-  public userPosts: UserPostsInterface[] = [];
-  public userPosts$!: Observable<UserPostsInterface[]>;
+  public filteredPosts: UserPostsInterface[] = [];
+  public filteredPosts$!: Observable<UserPostsInterface[]>;
 
   private destroy = new Subject<any>();
 
-  constructor(private cdRef: ChangeDetectorRef, private route: ActivatedRoute) {
-    this.userPosts$ = new Observable<UserPostsInterface[]>();
+  constructor(private cdRef: ChangeDetectorRef, private router: Router) {
+    this.filteredPosts = JSON.parse(localStorage.getItem('payload')!);
+    this.filteredPosts$ = new Observable<UserPostsInterface[]>();
   }
 
   ngAfterContentChecked(): void {
@@ -36,13 +36,18 @@ export class UserPostsComponent implements OnInit, AfterContentChecked {
   }
 
   getPosts(): void {
-    this.userPosts = JSON.parse(localStorage.getItem('payload')!).sort(
-      (a: any, b: any) => {
-        return (
-          new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
-        );
-      }
-    );
+    if (this.router.url.split('/')[1] === 'all') {
+      this.filteredPosts = JSON.parse(localStorage.getItem('payload')!);
+    } else if (this.router.url.split('/')[1] === 'following') { 
+      this.filteredPosts = JSON.parse(localStorage.getItem('payload')!).filter(
+        (posts: UserPostsInterface) => {
+          return (
+            posts.nickname.includes('lewishamilton') ||
+            posts.followers?.includes('lewishamilton')
+          );
+        }
+      );
+    }
   }
 
   ngOnDestroy(): void {

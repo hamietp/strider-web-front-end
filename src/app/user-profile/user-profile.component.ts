@@ -1,5 +1,12 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import {
+  AfterContentChecked,
+  ChangeDetectorRef,
+  Component,
+  Inject,
+  OnInit,
+} from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Observable, Subject } from 'rxjs';
 import { UserPostsComponent } from '../components/user-posts/user-posts.component';
 import { UserPostsInterface } from '../interfaces/user-posts.interface';
 
@@ -8,17 +15,28 @@ import { UserPostsInterface } from '../interfaces/user-posts.interface';
   templateUrl: './user-profile.component.html',
   styleUrls: ['./user-profile.component.scss'],
 })
-export class UserProfileComponent implements OnInit {
+export class UserProfileComponent implements OnInit, AfterContentChecked {
   public assetsPath = '../../../assets/portraits/';
   public userPosts: UserPostsInterface[] = [];
+  public userNumbers: UserPostsInterface[] = [];
+  public userNumbers$!: Observable<UserPostsInterface[]>;
+
   public fetchedData: UserPostsInterface[] = [];
   public userFollowing: string[] = [];
   public followable: boolean = false;
 
+  private destroy = new Subject<any>();
+
   constructor(
+    private cdRef: ChangeDetectorRef,
     public dialogRef: MatDialogRef<UserProfileComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
-  ) {}
+  ) {
+    this.userNumbers$ = new Observable<UserPostsInterface[]>();
+  }
+  ngAfterContentChecked(): void {
+    this.cdRef.detectChanges();
+  }
 
   ngOnInit(): void {
     this.fetchUserPosts();
@@ -54,7 +72,9 @@ export class UserProfileComponent implements OnInit {
   }
 
   followUser(): void {
-    let updateUserProfile = JSON.parse(localStorage.getItem('payload')!);
+    let updateUserProfile: UserPostsInterface[] = JSON.parse(
+      localStorage.getItem('payload')!
+    );
 
     updateUserProfile.forEach((post: any) => {
       if (post.nickname === this.data.id) {
@@ -68,10 +88,32 @@ export class UserProfileComponent implements OnInit {
       }
     });
 
-    console.log(updateUserProfile);
+    localStorage.setItem('payload', JSON.stringify(updateUserProfile));
+  }
+
+  unfollowUser(): void {
+    let updateUserProfile: UserPostsInterface[] = JSON.parse(
+      localStorage.getItem('payload')!
+    );
+
+    updateUserProfile.forEach((post: any) => {
+      if (post.nickname === 'lewishamilton') {
+        post.following = post.following.filter(
+          (following: string) => following !== this.data.id
+        );
+      }
+      if (post.nickname === this.data.id) {
+        post.followers = post.followers.filter(
+          (follower: string) => follower !== 'lewishamilton'
+        );
+      }
+    });
 
     localStorage.setItem('payload', JSON.stringify(updateUserProfile));
   }
 
-  unfollowUser(): void {}
+  ngOnDestroy(): void {
+    this.destroy.next(void 0);
+    this.destroy.complete();
+  }
 }

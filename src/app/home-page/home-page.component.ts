@@ -21,8 +21,6 @@ export class HomePageComponent implements OnInit {
   }
 
   initializeUserPosts(): void {
-    let userPosts: string[] = [];
-
     // Initialize a few mocked-up user posts if they don't exist
     if (localStorage.getItem('payload') === null) {
       const newPostObject: UserPostsInterface[] = [
@@ -55,11 +53,7 @@ export class HomePageComponent implements OnInit {
         },
       ];
 
-      newPostObject.forEach((post: UserPostsInterface) => {
-        userPosts = [...userPosts, post] as string[];
-      });
-
-      localStorage.setItem('payload', JSON.stringify(userPosts));
+      localStorage.setItem('payload', JSON.stringify(newPostObject));
     }
   }
 }
