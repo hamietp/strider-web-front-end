@@ -97,6 +97,7 @@ export class UserProfileComponent implements OnInit, AfterContentChecked {
     });
 
     localStorage.setItem('payload', JSON.stringify(updateUserProfile));
+    this.dialogRef.close();
   }
 
   unfollowUser(): void {
@@ -118,6 +119,7 @@ export class UserProfileComponent implements OnInit, AfterContentChecked {
     });
 
     localStorage.setItem('payload', JSON.stringify(updateUserProfile));
+    this.dialogRef.close();
   }
 
   ngOnDestroy(): void {

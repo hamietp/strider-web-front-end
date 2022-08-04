@@ -44,9 +44,9 @@
       mat-flat-button
       color="primary"
       (click)="onSubmit(postInput.value)"
-      [disabled]="postInput.value.length < 1 || userDailyPosts >= 5"
+      [disabled]="userDailyPosts >= 5 || postInput.value.length === 0"
       [matTooltip]="
-        userDailyPosts > 5 ? 'You have reached your daily post limit' : ''
+        userDailyPosts >= 5 ? 'You have reached your daily post limit' : ''
       "
     >
       Publish

@@ -1,0 +1,74 @@
+<div class="quote">
+  <span class="quote__header">
+    You are quote-posting from {{ this.data.username }}.</span
+  >
+  <div class="quote__new">
+    <div class="portrait">
+      <img
+        [src]="assetsPath + 'Lewis-Hamilton' + '.jpg'"
+        alt="User profile picture"
+        routerLink="/lewishamilton"
+      />
+    </div>
+    <div class="quote__input">
+      <mat-form-field appearance="standard" class="quote__input">
+        <textarea
+          #quoteInput
+          matInput
+          placeholder="What are your thoughts about this?"
+          cdkTextareaAutosize
+          #autosize="cdkTextareaAutosize"
+          cdkAutosizeMinRows="2"
+          cdkAutosizeMaxRows="15"
+          maxlength="777"
+          [formControl]="quoteTextarea"
+          [matTooltip]="
+            quoteInput.value.length === 777
+              ? 'You have reached the maximum post length'
+              : ''
+          "
+        ></textarea>
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="quote__actions">
+    <div class="quote__actions--length">{{ quoteInput.value.length }}/777</div>
+    <div class="quote__actions--submit">
+      <button
+        mat-icon-button
+        color="primary"
+        [disabled]="quoteInput.value.length === 0"
+        (click)="onSubmit(quoteInput.value)"
+      >
+        <mat-icon>send</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <hr />
+
+  <div class="quote__original">
+    <div class="quote__original__header">
+      <div class="quote__original__portrait">
+        <img
+          [src]="assetsPath + this.data.portrait + '.jpg'"
+          alt="User profile picture"
+        />
+      </div>
+      <div class="quote__original__post">
+        <div class="quote__original__data">
+          <div class="quote__original__data--name">
+            {{ this.data.username }}
+          </div>
+          <div class="quote__original__data--nickname">
+            @{{ this.data.nickname }}
+          </div>
+          <div class="quote__original__data--post-date">
+            · {{ this.data.timestamp | date: "MMMM, dd, h:mm a" }}
+          </div>
+        </div>
+        <div class="quote__original__message">{{ this.data.message }}</div>
+      </div>
+    </div>
+  </div>
+</div>

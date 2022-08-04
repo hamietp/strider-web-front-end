@@ -23,6 +23,7 @@ export class HostComponent {
       }
 
       this.currentDialog = dialog.open(UserProfileComponent, {
+        maxHeight: '90vh',
         data: {
           id: params['id'],
         },

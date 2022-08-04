@@ -1,5 +1,5 @@
 <div class="row" *ngFor="let item of filteredPosts">
-  <div class="col message-card" *ngIf="!item.repost">
+  <div class="col message-card" *ngIf="!item.repost && !item.quotePost">
     <div class="user__header">
       <div class="user__portrait">
         <img
@@ -28,18 +28,31 @@
       "
     >
       <div class="user__actions--repost">
-        <button mat-icon-button color="primary" class="action__repost" (click)="repost(item)">
-          <mat-icon>cached</mat-icon> Repost 
+        <button
+          mat-icon-button
+          color="primary"
+          class="action__repost"
+          (click)="repost(item)"
+        >
+          <mat-icon>cached</mat-icon> Repost
         </button>
-        <button mat-icon-button color="primary" class="action__quote" (click)="repost(item)">
-          <mat-icon>format_quote</mat-icon> Quote-post 
+        <button
+          mat-icon-button
+          color="primary"
+          class="action__quote"
+          [disabled]="userDailyPosts >= 5"
+          (click)="quotePost(item)"
+        >
+          <mat-icon>format_quote</mat-icon> Quote-post
         </button>
       </div>
     </div>
   </div>
 
   <div class="col message-card" *ngIf="item.repost">
-    <div class="repost__message"><mat-icon>cached</mat-icon>You reposted from {{ item.repostFrom }}:</div>
+    <div class="repost__message">
+      <mat-icon>cached</mat-icon>You reposted from {{ item.repostFrom }}:
+    </div>
     <div class="user__header">
       <div class="user__portrait">
         <img
@@ -57,6 +70,53 @@
           </div>
         </div>
         <div class="user__message">{{ item.message }}</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col message-card" *ngIf="item.quotePost">
+    <div class="quote">
+      <div class="quote__user">
+        <div class="user__header">
+          <div class="user__portrait">
+            <img
+              [src]="assetsPath + item.portrait + '.jpg'"
+              alt="User profile picture"
+              routerLink="/{{ item.nickname }}"
+            />
+          </div>
+          <div class="user__post">
+            <div class="user__data">
+              <div class="user__data--name">{{ item.username }}</div>
+              <div class="user__data--nickname">@{{ item.nickname }}</div>
+              <div class="user__data--post-date">
+                · {{ item.timestamp | date: "MMMM, dd, h:mm a" }}
+              </div>
+            </div>
+            <div class="user__message">{{ item.message }}</div>
+          </div>
+        </div>
+      </div>
+      <div class="quote__post">
+        <div class="user__header">
+          <div class="user__portrait">
+            <img
+              [src]="assetsPath + item.repostPortrait + '.jpg'"
+              alt="User profile picture"
+              routerLink="/{{ item.repostNickname }}"
+            />
+          </div>
+          <div class="user__post">
+            <div class="user__data">
+              <div class="user__data--name">{{ item.repostFrom }}</div>
+              <div class="user__data--nickname">@{{ item.repostNickname }}</div>
+              <div class="user__data--post-date">
+                · {{ item.repostTimestamp | date: "MMMM, dd, h:mm a" }}
+              </div>
+            </div>
+            <div class="user__message">{{ item.quoteMessage }}</div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

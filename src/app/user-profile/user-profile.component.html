@@ -36,7 +36,7 @@
       </div>
       <div class="profile__data--nickname">@{{ fetchedData[0].nickname }}</div>
       <div class="profile__data--join-date">
-        <mat-icon>calendar_month</mat-icon> Joined November 10, 2020
+        <mat-icon>calendar_month</mat-icon> Joined {{fetchedData[0].dateJoined | date: "MMMM d, yyyy"}}
       </div>
     </div>
     <div class="profile__numbers">

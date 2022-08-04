@@ -4,6 +4,7 @@ export interface UserPostsInterface {
   message: string;
   timestamp: string;
   portrait: string;
+  dateJoined?: string;
   followers?: Array<string>;
   following?: Array<string>;
   repost?: boolean;
