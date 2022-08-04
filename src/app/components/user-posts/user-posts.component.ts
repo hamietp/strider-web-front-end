@@ -5,7 +5,7 @@ import {
   Inject,
   OnInit,
 } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
 import { UserPostsInterface } from 'src/app/interfaces/user-posts.interface';
@@ -26,7 +26,7 @@ export class UserPostsComponent implements OnInit, AfterContentChecked {
 
   currentRoute: string = this.router.url.split('/')[1];
 
-  constructor(private cdRef: ChangeDetectorRef, private router: Router) {
+  constructor(private cdRef: ChangeDetectorRef, private router: Router, public dialog: MatDialog) {
     this.filteredPosts = JSON.parse(localStorage.getItem('payload')!);
     this.filteredPosts$ = new Observable<UserPostsInterface[]>();
   }
@@ -88,6 +88,7 @@ export class UserPostsComponent implements OnInit, AfterContentChecked {
     
     localStorage.setItem('payload', JSON.stringify(allPosts));
 
+    this.dialog.closeAll();
   }
 
   ngOnDestroy(): void {

@@ -14,6 +14,18 @@
     }
   }
 
+  &__actions {
+    &--repost{
+      display: flex;
+      flex-direction: row;
+      justify-content: space-evenly;
+      .action {
+        &__repost {
+        }
+      }
+    }
+  }
+
   &__data {
     display: flex;
     flex-direction: row;
@@ -47,11 +59,19 @@
   background-color: #fff;
 
   .repost {
+    
     &__message{
       font-size: 0.75rem;
       font-style: italic;
       color: #666;
       margin: 0 0 0.5rem 3rem;
+
+      mat-icon {
+        font-size: 1rem;
+        margin-left: 1.5rem;
+        position: relative;
+        top: 0.65rem;
+      }
     }
   }
 }

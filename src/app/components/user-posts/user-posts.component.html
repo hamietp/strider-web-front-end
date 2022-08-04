@@ -28,15 +28,18 @@
       "
     >
       <div class="user__actions--repost">
-        <button mat-flat-button color="primary" (click)="repost(item)">
-          Repost
+        <button mat-icon-button color="primary" class="action__repost" (click)="repost(item)">
+          <mat-icon>cached</mat-icon> Repost 
+        </button>
+        <button mat-icon-button color="primary" class="action__quote" (click)="repost(item)">
+          <mat-icon>format_quote</mat-icon> Quote-post 
         </button>
       </div>
     </div>
   </div>
 
   <div class="col message-card" *ngIf="item.repost">
-    <div class="repost__message">You reposted from {{ item.repostFrom }}:</div>
+    <div class="repost__message"><mat-icon>cached</mat-icon>You reposted from {{ item.repostFrom }}:</div>
     <div class="user__header">
       <div class="user__portrait">
         <img
