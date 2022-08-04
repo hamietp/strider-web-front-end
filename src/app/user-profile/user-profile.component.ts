@@ -6,8 +6,8 @@ import {
   OnInit,
 } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Router } from '@angular/router';
-import { Observable, Subject, takeUntil } from 'rxjs';
+import { NavigationEnd, Router, RoutesRecognized } from '@angular/router';
+import { filter, Observable, pairwise, Subject, takeUntil } from 'rxjs';
 import { UserPostsInterface } from '../interfaces/user-posts.interface';
 
 @Component({
@@ -27,7 +27,7 @@ export class UserProfileComponent implements OnInit, AfterContentChecked {
   private destroy = new Subject<any>();
 
   currentRoute: string = this.router.url.split('/')[1];
-
+  previousUrl: string[] = [];
 
   constructor(
     private cdRef: ChangeDetectorRef,
@@ -36,6 +36,23 @@ export class UserProfileComponent implements OnInit, AfterContentChecked {
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.userNumbers$ = new Observable<UserPostsInterface[]>();
+
+    router.events
+      .pipe(filter((event) => event instanceof NavigationEnd))
+      .subscribe((event: any) => {
+        this.previousUrl.push(event.url);
+      });
+
+    this.dialogRef.afterClosed().subscribe(() => {
+      if (this.previousUrl.length === 1) {
+        this.router.navigateByUrl('/all');
+      } else if (
+        this.previousUrl[0] !== 'all' &&
+        this.previousUrl[1] !== 'all'
+      ) {
+        this.previousUrl.pop();
+      }
+    });
   }
   ngAfterContentChecked(): void {
     this.cdRef.detectChanges();

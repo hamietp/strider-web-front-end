@@ -28,9 +28,9 @@ export class HostComponent {
           id: params['id'],
         },
       });
-      this.currentDialog.afterClosed().subscribe((_) => {
-        router.navigateByUrl('/');
-      });
+      // this.currentDialog.afterClosed().subscribe((_) => {
+      //     router.navigateByUrl('/');
+      // });
     });
   }
 
