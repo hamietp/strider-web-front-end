@@ -51,7 +51,9 @@
 
   <div class="col message-card" *ngIf="item.repost">
     <div class="repost__message">
-      <mat-icon>cached</mat-icon>You reposted from {{ item.repostFrom }}:
+      <mat-icon>cached</mat-icon
+      >{{ item.nickname === "lewishamilton" ? "You" : item.username }}
+          reposted from {{ item.repostFrom }}:
     </div>
     <div class="user__header">
       <div class="user__portrait">

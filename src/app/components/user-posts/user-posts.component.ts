@@ -49,6 +49,7 @@ export class UserPostsComponent implements OnInit, AfterContentChecked {
   ngOnInit(): void {
     this.getPosts();
     this.userDailyPosts = this.getUserDailyPosts();
+    console.log(this.filteredPosts);
   }
 
   getPosts(): void {
