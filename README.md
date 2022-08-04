@@ -1,27 +1,39 @@
-# StriderWebFrontEnd
+# Strider Web Frontend Assessment 2.3
+# Author
+Hamilton Lopes, 2022.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.1.0.
+## Packages used
+
+![image](https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white)
+![image](https://img.shields.io/badge/Material--UI-0081CB?style=for-the-badge&logo=material-ui&logoColor=white)
+![image](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)
+![image](https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white)  
+- Angular Version 14.1.0  
+- NodeJS Version 16.16  
+- [Material Angular](https://material.angular.io/) version 14.1.1
+
+## Installing the packages
+Run `npm install` in the root directory of the project to install all required packages.
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+After installing all packages, run `ng serve` for a dev server.   
+Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-## Code scaffolding
+# How-to Instructions
+## Using the application
+You can write the post in the top box of the page, and submit with the blue button. The post is limited to 777 characters and you can submit 5 posts a day -- including reposts and quoteposts. Users cannot delete or edit their posts.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## User profiles
+In order to access the profile menus, you need to click in the user's portrait to access his/her profile.
 
-## Build
+## Following users
+Inside their profile, you can follow other users by clicking the follow button. You can unfollow them by clicking the unfollow button.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Switching between the two views
+You can switch between the two views (all/following) by clicking the switch button, located below the "write post" input. Users can also type "/all" or "/following" in the URL to switch between the two views.
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Reposting and Quote-posting
+Users can click on the buttons located below each post, inside the users' profiles, to repost or quote-post.   
+   
+The repost action is instant, while when you quote-post, you need to type the message in the input box and click on the blue button to submit.
