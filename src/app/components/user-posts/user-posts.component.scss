@@ -45,4 +45,13 @@
   border-bottom: #dddddd 1px solid;
   padding: 1rem;
   background-color: #fff;
+
+  .repost {
+    &__message{
+      font-size: 0.75rem;
+      font-style: italic;
+      color: #666;
+      margin: 0 0 0.5rem 3rem;
+    }
+  }
 }

@@ -26,10 +26,7 @@ export class UserPostsComponent implements OnInit, AfterContentChecked {
 
   currentRoute: string = this.router.url.split('/')[1];
 
-  constructor(
-    private cdRef: ChangeDetectorRef,
-    private router: Router,
-  ) {
+  constructor(private cdRef: ChangeDetectorRef, private router: Router) {
     this.filteredPosts = JSON.parse(localStorage.getItem('payload')!);
     this.filteredPosts$ = new Observable<UserPostsInterface[]>();
   }
@@ -58,12 +55,39 @@ export class UserPostsComponent implements OnInit, AfterContentChecked {
     } else {
       this.filteredPosts = JSON.parse(localStorage.getItem('payload')!).filter(
         (posts: UserPostsInterface) => {
-          return (
-            posts.nickname.includes(this.router.url.split('/')[1])
-          );
+          return posts.nickname.includes(this.router.url.split('/')[1]);
         }
       );
     }
+  }
+
+  repost(post: UserPostsInterface): void {
+    let allPosts: UserPostsInterface[] = JSON.parse(localStorage.getItem('payload')!) as UserPostsInterface[];
+    let currentUserPosts = JSON.parse(localStorage.getItem('payload')!).filter(
+      (user: UserPostsInterface) => {
+        return user.nickname === 'lewishamilton';
+      }
+    );
+    
+    const newRepostObject: UserPostsInterface = {
+      username: currentUserPosts[0].username,
+      nickname: currentUserPosts[0].nickname,
+      message: post.message,
+      timestamp: new Date().toISOString(),
+      portrait: currentUserPosts[0].portrait,
+      following: post.following,
+      followers: post.followers,
+      repost: true,
+      repostFrom: post.username,
+      repostNickname: post.nickname,
+      repostTimestamp: post.timestamp,
+      repostPortrait: post.portrait,
+    };
+    
+    allPosts = [newRepostObject, ...allPosts] as UserPostsInterface[];
+    
+    localStorage.setItem('payload', JSON.stringify(allPosts));
+
   }
 
   ngOnDestroy(): void {

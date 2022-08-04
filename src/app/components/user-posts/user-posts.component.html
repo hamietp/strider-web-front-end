@@ -1,5 +1,5 @@
 <div class="row" *ngFor="let item of filteredPosts">
-  <div class="col message-card">
+  <div class="col message-card" *ngIf="!item.repost">
     <div class="user__header">
       <div class="user__portrait">
         <img
@@ -20,12 +20,41 @@
       </div>
     </div>
     <div
-      class="repost"
-      *ngIf="currentRoute !== 'all' &&
+      class="user__actions"
+      *ngIf="
+        currentRoute !== 'all' &&
         currentRoute !== 'following' &&
-        currentRoute !== 'lewishamilton'"
+        currentRoute !== 'lewishamilton'
+      "
     >
-      Repost
+      <div class="user__actions--repost">
+        <button mat-flat-button color="primary" (click)="repost(item)">
+          Repost
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="col message-card" *ngIf="item.repost">
+    <div class="repost__message">You reposted from {{ item.repostFrom }}:</div>
+    <div class="user__header">
+      <div class="user__portrait">
+        <img
+          [src]="assetsPath + item.repostPortrait + '.jpg'"
+          alt="User profile picture"
+          routerLink="/{{ item.repostNickname }}"
+        />
+      </div>
+      <div class="user__post">
+        <div class="user__data">
+          <div class="user__data--name">{{ item.repostFrom }}</div>
+          <div class="user__data--nickname">@{{ item.repostNickname }}</div>
+          <div class="user__data--post-date">
+            · {{ item.repostTimestamp | date: "MMMM, dd, h:mm a" }}
+          </div>
+        </div>
+        <div class="user__message">{{ item.message }}</div>
+      </div>
     </div>
   </div>
 </div>
