@@ -32,7 +32,7 @@ export class HomePageComponent implements OnInit {
           timestamp: new Date('03 August 2022 21:22 UTC').toISOString(),
           dateJoined: new Date('01 December 2016 09:09 UTC').toISOString(),
           following: ['lewishamilton', 'srslyjane'],
-          followers: ['fr4nk13', 'annepostrr'],
+          followers: ['fr4nkieF1', 'annepostrr'],
         },
         {
           username: 'jeannie is a genie',
@@ -47,7 +47,7 @@ export class HomePageComponent implements OnInit {
           repostPortrait: 'Jane-doe',
           repostTimestamp: new Date('02 August 2022 12:02 UTC').toISOString(),
           following: ['lewishamilton', 'srslyjane'],
-          followers: ['fr4nk13', 'annepostrr'],
+          followers: ['fr4nkieF1', 'annepostrr'],
         },
         {
           username: 'jeannie is a genie',
@@ -57,11 +57,11 @@ export class HomePageComponent implements OnInit {
           timestamp: new Date('03 August 2022 21:22 UTC').toISOString(),
           dateJoined: new Date('01 December 2016 09:09 UTC').toISOString(),
           following: ['lewishamilton', 'srslyjane'],
-          followers: ['fr4nk13', 'annepostrr'],
+          followers: ['fr4nkieF1', 'annepostrr'],
         },
         {
           username: 'frankie @ #HungaryGP',
-          nickname: 'fr4nk13',
+          nickname: 'fr4nkieF1',
           message: `You know I'm always gonna support you when you're making questionable choices. Let me know when you schedule a test drive, I wanna drive that new car too`,
           portrait: 'Frank-doe',
           timestamp: new Date('03 August 2022 18:58 UTC').toISOString(),
@@ -82,7 +82,7 @@ export class HomePageComponent implements OnInit {
           timestamp: new Date('02 August 2022 12:02 UTC').toISOString(),
           dateJoined: new Date('12 March 2021 09:09 UTC').toISOString(),
           following: ['lewishamilton'],
-          followers: ['fr4nk13', 'annepostrr'],
+          followers: ['fr4nkieF1', 'annepostrr'],
         },
         {
           username: 'j a n e',
@@ -92,7 +92,7 @@ export class HomePageComponent implements OnInit {
           timestamp: new Date('02 August 2022 12:01 UTC').toISOString(),
           dateJoined: new Date('12 March 2021 09:09 UTC').toISOString(),
           following: ['lewishamilton'],
-          followers: ['fr4nk13', 'annepostrr'],
+          followers: ['fr4nkieF1', 'annepostrr'],
         },
         {
           username: 'Hamilton',
@@ -118,12 +118,12 @@ export class HomePageComponent implements OnInit {
           portrait: 'Lewis-Hamilton',
           timestamp: new Date('01 August 2022 10:33 UTC').toISOString(),
           dateJoined: new Date('10 November 2010 09:09 UTC').toISOString(),
-          following: ['fr4nk13'],
-          followers: ['fr4nk13', 'happyfields', 'annepostrr'],
+          following: ['fr4nkieF1'],
+          followers: ['fr4nkieF1', 'happyfields', 'annepostrr'],
         },
         {
           username: 'frankie @ #HungaryGP',
-          nickname: 'fr4nk13',
+          nickname: 'fr4nkieF1',
           message:
             'HungaryGP was such a great race! Had the opportunity to meet Sir Lewis Hamilton yesterday. Thanks for being such a humble person with all those ppl asking for photos and such',
           portrait: 'Frank-doe',
@@ -176,7 +176,7 @@ export class HomePageComponent implements OnInit {
           timestamp: new Date('25 July 2022 10:12 UTC').toISOString(),
           dateJoined: new Date('4 June 2014 09:09 UTC').toISOString(),
           following: ['lewishamilton'],
-          followers: ['happyfields', 'fr4nk13'],
+          followers: ['happyfields', 'fr4nkieF1'],
         },
       ];
 
