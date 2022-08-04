@@ -25,6 +25,7 @@ After installing all packages, run `ng serve` for a dev server.
 Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
 # How-to Instructions
+The user will "play" as Lewis Hamilton, as a pun with my name :), and a few posts are generated automatically when starting the project.
 
 ## Using the application
 
