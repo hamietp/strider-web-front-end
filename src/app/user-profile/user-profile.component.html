@@ -2,26 +2,41 @@
   <div class="profile__header">
     <div class="profile__data">
       <div class="profile__data--portrait">
-        <img [src]="assetsPath + fetchedData[0].portrait + '.jpg'" alt="User profile picture" />
+        <img
+          [src]="assetsPath + fetchedData[0].portrait + '.jpg'"
+          alt="User profile picture"
+        />
         <div class="profile__data--follow">
-          <button *ngIf="followable && fetchedData[0].nickname !== 'lewishamilton'" mat-stroked-button color="link" (click)="followUser()" 
-          [disabled]="fetchedData[0].nickname === 'lewishamilton' ?
-          true : false">
-          <mat-icon class="follow">person_add</mat-icon> Follow
-        </button>
-        <button *ngIf="!followable && fetchedData[0].nickname !== 'lewishamilton'" mat-stroked-button color="link" (click)="unfollowUser()" 
-        [disabled]="fetchedData[0].nickname === 'lewishamilton' ?
-        true : false">
-        <mat-icon class="follow">person_remove</mat-icon> Unfollow
-      </button>
-    </div>
+          <button
+            *ngIf="followable && fetchedData[0].nickname !== 'lewishamilton'"
+            mat-stroked-button
+            color="link"
+            (click)="followUser()"
+            [disabled]="
+              fetchedData[0].nickname === 'lewishamilton' ? true : false
+            "
+          >
+            <mat-icon class="follow">person_add</mat-icon> Follow
+          </button>
+          <button
+            *ngIf="!followable && fetchedData[0].nickname !== 'lewishamilton'"
+            mat-stroked-button
+            color="link"
+            (click)="unfollowUser()"
+            [disabled]="
+              fetchedData[0].nickname === 'lewishamilton' ? true : false
+            "
+          >
+            <mat-icon class="follow">person_remove</mat-icon> Unfollow
+          </button>
+        </div>
       </div>
       <div class="profile__data--username">
         {{ fetchedData[0].username }}
-  </div>
-  <div class="profile__data--nickname">@{{ fetchedData[0].nickname }}</div>
-  <div class="profile__data--join-date">
-    <mat-icon>calendar_month</mat-icon> Joined November 10, 2020
+      </div>
+      <div class="profile__data--nickname">@{{ fetchedData[0].nickname }}</div>
+      <div class="profile__data--join-date">
+        <mat-icon>calendar_month</mat-icon> Joined November 10, 2020
       </div>
     </div>
     <div class="profile__numbers">
@@ -47,10 +62,16 @@
       </div>
     </div>
   </div>
-  <div class="profile__new-post">
-    <app-new-post></app-new-post>
-  </div>
-  <div class="profile__user-posts">
-    <app-user-posts></app-user-posts>
-  </div>
+</div>
+<div class="new-post">
+  <app-new-post
+    *ngIf="
+      currentRoute !== 'all' &&
+      currentRoute !== 'following' &&
+      currentRoute === 'lewishamilton'
+    "
+  ></app-new-post>
+</div>
+<div class="user-posts">
+  <app-user-posts></app-user-posts>
 </div>

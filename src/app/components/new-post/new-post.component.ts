@@ -110,8 +110,8 @@ export class NewPostComponent implements OnInit, AfterContentChecked {
     }
   }
 
-  // method to enable the user to type the url as 
-  // .../all or .../following and get the correct post feed
+  // method to enable the user to type the url 
+  // as /all or /following and get the correct post feed
   slideUrlCheck(): boolean {
     if (this.router.url.split('/')[1] === 'all') {
       return false;

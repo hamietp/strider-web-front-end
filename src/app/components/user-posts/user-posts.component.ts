@@ -2,11 +2,14 @@ import {
   AfterContentChecked,
   ChangeDetectorRef,
   Component,
+  Inject,
   OnInit,
 } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
 import { UserPostsInterface } from 'src/app/interfaces/user-posts.interface';
+import { UserProfileComponent } from 'src/app/user-profile/user-profile.component';
 
 @Component({
   selector: 'app-user-posts',
@@ -21,7 +24,12 @@ export class UserPostsComponent implements OnInit, AfterContentChecked {
 
   private destroy = new Subject<any>();
 
-  constructor(private cdRef: ChangeDetectorRef, private router: Router) {
+  currentRoute: string = this.router.url.split('/')[1];
+
+  constructor(
+    private cdRef: ChangeDetectorRef,
+    private router: Router,
+  ) {
     this.filteredPosts = JSON.parse(localStorage.getItem('payload')!);
     this.filteredPosts$ = new Observable<UserPostsInterface[]>();
   }
@@ -38,12 +46,20 @@ export class UserPostsComponent implements OnInit, AfterContentChecked {
   getPosts(): void {
     if (this.router.url.split('/')[1] === 'all') {
       this.filteredPosts = JSON.parse(localStorage.getItem('payload')!);
-    } else if (this.router.url.split('/')[1] === 'following') { 
+    } else if (this.router.url.split('/')[1] === 'following') {
       this.filteredPosts = JSON.parse(localStorage.getItem('payload')!).filter(
         (posts: UserPostsInterface) => {
           return (
             posts.nickname.includes('lewishamilton') ||
             posts.followers?.includes('lewishamilton')
+          );
+        }
+      );
+    } else {
+      this.filteredPosts = JSON.parse(localStorage.getItem('payload')!).filter(
+        (posts: UserPostsInterface) => {
+          return (
+            posts.nickname.includes(this.router.url.split('/')[1])
           );
         }
       );

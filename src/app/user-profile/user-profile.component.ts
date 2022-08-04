@@ -6,8 +6,8 @@ import {
   OnInit,
 } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Observable, Subject } from 'rxjs';
-import { UserPostsComponent } from '../components/user-posts/user-posts.component';
+import { Router } from '@angular/router';
+import { Observable, Subject, takeUntil } from 'rxjs';
 import { UserPostsInterface } from '../interfaces/user-posts.interface';
 
 @Component({
@@ -18,7 +18,6 @@ import { UserPostsInterface } from '../interfaces/user-posts.interface';
 export class UserProfileComponent implements OnInit, AfterContentChecked {
   public assetsPath = '../../../assets/portraits/';
   public userPosts: UserPostsInterface[] = [];
-  public userNumbers: UserPostsInterface[] = [];
   public userNumbers$!: Observable<UserPostsInterface[]>;
 
   public fetchedData: UserPostsInterface[] = [];
@@ -27,8 +26,12 @@ export class UserProfileComponent implements OnInit, AfterContentChecked {
 
   private destroy = new Subject<any>();
 
+  currentRoute: string = this.router.url.split('/')[1];
+
+
   constructor(
     private cdRef: ChangeDetectorRef,
+    public router: Router,
     public dialogRef: MatDialogRef<UserProfileComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
@@ -44,29 +47,37 @@ export class UserProfileComponent implements OnInit, AfterContentChecked {
   }
 
   getPosts(): void {
-    this.userPosts = JSON.parse(localStorage.getItem('payload')!).sort(
-      (a: any, b: any) => {
+    this.userPosts = JSON.parse(localStorage.getItem('payload')!)
+      .filter((post: any) => {
+        return post.nickname === this.data.id;
+      })
+      .sort((a: any, b: any) => {
         return (
           new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
         );
-      }
-    );
+      });
   }
 
   fetchUserPosts(): void {
-    let userNickname = JSON.parse(localStorage.getItem('payload')!);
-    let userFollowing = userNickname[0].following;
+    let userNickname = JSON.parse(localStorage.getItem('payload')!).filter(
+      (post: any) => post.nickname === this.data.id
+    );
+    let userFollowing: UserPostsInterface[] = userNickname.filter(
+      (user: any) => {
+        return user.following === this.data.id;
+      }
+    );
 
     userNickname.forEach((post: any) => {
       if (post.nickname === this.data.id) {
         this.fetchedData.push(post);
         userFollowing.push(post.following);
       }
-    });
 
-    userNickname.forEach(() => {
-      if (!userFollowing.includes(this.data.id)) {
+      if (!userNickname[0].followers!.includes('lewishamilton')) {
         this.followable = true;
+      } else {
+        this.followable = false;
       }
     });
   }
@@ -78,10 +89,7 @@ export class UserProfileComponent implements OnInit, AfterContentChecked {
 
     updateUserProfile.forEach((post: any) => {
       if (post.nickname === this.data.id) {
-        post.followers = [
-          ...post.followers,
-          JSON.parse(localStorage.getItem('payload')!)[0].nickname,
-        ];
+        post.followers = [...post.followers, 'lewishamilton'];
       }
       if (post.nickname === 'lewishamilton') {
         post.following = [...post.following, this.data.id];

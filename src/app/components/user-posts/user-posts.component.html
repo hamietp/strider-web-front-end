@@ -19,5 +19,13 @@
         <div class="user__message">{{ item.message }}</div>
       </div>
     </div>
+    <div
+      class="repost"
+      *ngIf="currentRoute !== 'all' &&
+        currentRoute !== 'following' &&
+        currentRoute !== 'lewishamilton'"
+    >
+      Repost
+    </div>
   </div>
 </div>
